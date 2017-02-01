@@ -35,6 +35,7 @@ import sys
 import time
 import urllib
 import uuid
+import cec
 
 
 
@@ -372,6 +373,33 @@ class rest_api_handler(object):
         r = requests.get(self.off_cmd)
         return r.status_code == 200
 
+class test_api_handler(object):
+    def __init__(self, on_cmd, off_cmd):
+        self.on_cmd = on_cmd
+        self.off_cmd = off_cmd
+
+    def on(self):
+        dbg(self.on_cmd)
+        return True
+
+    def off(self):
+        dbg(self.off_cmd)
+        return True
+      
+class tv_api_handler(object):
+    def __init__(self):
+        tv = cec.Device(0)
+
+    def on(self):
+        tv.power_on()
+        dbg("sending cec tv power on")
+        return True
+
+    def off(self):
+        tv.standby()
+        dbg("sending cec tv standby")
+        return True
+
 
 # Each entry is a list with the following elements:
 #
@@ -384,8 +412,9 @@ class rest_api_handler(object):
 # list will be used.
 
 FAUXMOS = [
-    ['office lights', rest_api_handler('http://192.168.5.4/ha-api?cmd=on&a=office', 'http://192.168.5.4/ha-api?cmd=off&a=office')],
-    ['kitchen lights', rest_api_handler('http://192.168.5.4/ha-api?cmd=on&a=kitchen', 'http://192.168.5.4/ha-api?cmd=off&a=kitchen')],
+    ['bath lights', test_api_handler('bath lights on', 'bath lights off')],
+    ['bedroom lights', test_api_handler('bedroom lights on', 'bedroom lights off')],
+    ['bedroom tv', tv_api_handler()],
 ]
 
 
@@ -409,6 +438,18 @@ for one_faux in FAUXMOS:
         # a fixed port wasn't specified, use a dynamic one
         one_faux.append(0)
     switch = fauxmo(one_faux[0], u, p, None, one_faux[2], action_handler = one_faux[1])
+    
+
+adapters = cec.list_adapters()
+dbg(adapters)
+
+if len(adapters) > 0:
+   adapter = adapters[0]
+   cec.init(adapter)
+else:
+   cec.init()
+
+tv = cec.Device(0)
 
 dbg("Entering main loop\n")
 

@@ -66,9 +66,6 @@ for c in office_light:
    else:
       office_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
-pi.wave_add_generic(office_light_wf)
-office_light_wid = pi.wave_create() # create and save id
-pi.wave_clear() # clear any existing waveforms
       
 for c in office_fan_off:
    if c == '1':
@@ -76,9 +73,6 @@ for c in office_fan_off:
    else:
       office_fan_off_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_fan_off_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
-pi.wave_add_generic(office_fan_off_wf)
-office_fan_off_wid = pi.wave_create() # create and save id
-pi.wave_clear() # clear any existing waveforms
       
 for c in office_fan_low:
    if c == '1':
@@ -86,9 +80,6 @@ for c in office_fan_low:
    else:
       office_fan_low_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_fan_low_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
-pi.wave_add_generic(office_fan_low_wf)
-office_fan_low_wid = pi.wave_create() # create and save id
-pi.wave_clear() # clear any existing waveforms
       
 for c in office_fan_med:
    if c == '1':
@@ -96,9 +87,6 @@ for c in office_fan_med:
    else:
       office_fan_med_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_fan_med_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
-pi.wave_add_generic(office_fan_med_wf)
-office_fan_med_wid = pi.wave_create() # create and save id
-pi.wave_clear() # clear any existing waveforms
       
 for c in office_fan_high:
    if c == '1':
@@ -106,9 +94,6 @@ for c in office_fan_high:
    else:
       office_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
-pi.wave_add_generic(office_fan_high_wf)
-office_fan_high_wid = pi.wave_create() # create and save id
-pi.wave_clear() # clear any existing waveforms
 
       
 
@@ -512,7 +497,7 @@ class rf_handler(object):
 
 FAUXMOS = [
     ['bedroom tv', tv_api_handler(), 49153],
-    ['office lights', rf_handler(office_light_wf, office_light_wf, 0.2), 49154],
+    ['office', rf_handler(office_light_wf, office_light_wf, 0.2), 49154],
     ['office fan', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49155],
     ['office fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49156],
 ]

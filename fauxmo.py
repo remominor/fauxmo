@@ -36,8 +36,81 @@ import time
 import urllib
 import uuid
 import cec
+import pigpio
 
 
+GPIO = 17
+GPIO17 = (1<<17)
+DELAY = 300
+
+pi = pigpio.pi()
+pi.set_mode(GPIO, pigpio.OUTPUT)
+
+office_light_wf=[]
+office_fan_off_wf=[]
+office_fan_low_wf=[]
+office_fan_med_wf=[]
+office_fan_high_wf=[]
+
+office_light="001011011011011011001001001001001001011000"
+office_fan_off="001011011011011011001001001001001011001000"
+office_fan_low="001011011011011011001001001011001001001000"
+office_fan_med="001011011011011011001001011001001001001000"
+office_fan_high="001011011011011011001011001001001001001000"
+
+pi.wave_clear() # clear any existing waveforms
+
+for c in office_light:
+   if c == '1':
+      office_light_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      office_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+office_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+pi.wave_add_generic(office_light_wf)
+office_fan_high_wid = pi.wave_create() # create and save id
+pi.wave_clear() # clear any existing waveforms
+      
+for c in office_fan_off:
+   if c == '1':
+      office_fan_off_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      office_fan_off_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+office_fan_off_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+pi.wave_add_generic(office_fan_off_wf)
+office_fan_off_wid = pi.wave_create() # create and save id
+pi.wave_clear() # clear any existing waveforms
+      
+for c in office_fan_low:
+   if c == '1':
+      office_fan_low_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      office_fan_low_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+office_fan_low_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+pi.wave_add_generic(office_fan_low_wf)
+office_fan_low_wid = pi.wave_create() # create and save id
+pi.wave_clear() # clear any existing waveforms
+      
+for c in office_fan_med:
+   if c == '1':
+      office_fan_med_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      office_fan_med_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+office_fan_med_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+pi.wave_add_generic(office_fan_med_wf)
+office_fan_med_wid = pi.wave_create() # create and save id
+pi.wave_clear() # clear any existing waveforms
+      
+for c in office_fan_high:
+   if c == '1':
+      office_fan_high_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      office_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+office_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+pi.wave_add_generic(office_fan_high_wf)
+office_fan_high_wid = pi.wave_create() # create and save id
+pi.wave_clear() # clear any existing waveforms
+
+      
 
 # This XML is the minimum needed to define one of our virtual switches
 # to the Amazon Echo
@@ -412,7 +485,7 @@ class tv_api_handler(object):
 # list will be used.
 
 FAUXMOS = [
-    ['bath lights', test_api_handler('bath lights on', 'bath lights off')],
+    ['office lights', test_api_handler('bath lights on', 'bath lights off'), 49153],
     ['bedroom lights', test_api_handler('bedroom lights on', 'bedroom lights off')],
     ['bedroom tv', tv_api_handler()],
 ]

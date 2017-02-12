@@ -654,14 +654,8 @@ FAUXMOS = [
     ['bedroom fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49163],
     ['media', rf_handler(office_light_wf, office_light_wf, 0.2), 49164],
     ['media fan', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49165],
-    ['media fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49166],
-    ['media fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49167],
-    ['media fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49168],
     ['living fan light', rf_handler(office_light_wf, office_light_wf, 0.2), 49169],
     ['living fan', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49170],
-    ['living fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49171],
-    ['living fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49172],
-    ['living fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49173],
 ]
 
 

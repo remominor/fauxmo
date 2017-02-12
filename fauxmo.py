@@ -480,7 +480,9 @@ class rf_handler(object):
         self.pulse_time = pulse_time
 
     def on(self):
-        pi.wave_send_repeat(self.on_cmd) # start sending wave on repeat
+        pi.wave_add_generic(self.on_cmd)
+        wid = pi.wave_create() # create and save id
+        pi.wave_send_repeat(wid) # start sending wave on repeat
         time.sleep(self.pulse_time)
         pi.wave_tx_stop() # stop waveform
         pi.wave_clear() # clear all waveforms
@@ -488,7 +490,9 @@ class rf_handler(object):
         return True
 
     def off(self):
-        pi.wave_send_repeat(self.off_cmd) # start sending wave on repeat
+        pi.wave_add_generic(self.off_cmd)
+        wid = pi.wave_create() # create and save id
+        pi.wave_send_repeat(wid) # start sending wave on repeat
         time.sleep(self.pulse_time)
         pi.wave_tx_stop() # stop waveform
         pi.wave_clear() # clear all waveforms
@@ -508,9 +512,9 @@ class rf_handler(object):
 
 FAUXMOS = [
     ['bedroom tv', tv_api_handler(), 49153],
-    ['office lights', rf_handler(office_light_wid, office_light_wid, 0.2), 49154],
-    ['office fan', rf_handler(office_fan_high_wid, office_fan_off_wid, 0.2), 49155],
-    ['office fan low', rf_handler(office_fan_low_wid, office_fan_off_wid, 0.2), 49156],
+    ['office lights', rf_handler(office_light_wf, office_light_wf, 0.2), 49154],
+    ['office fan', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49155],
+    ['office fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49156],
 ]
 
 

@@ -67,7 +67,7 @@ for c in office_light:
       office_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
 pi.wave_add_generic(office_light_wf)
-office_fan_high_wid = pi.wave_create() # create and save id
+office_light_wid = pi.wave_create() # create and save id
 pi.wave_clear() # clear any existing waveforms
       
 for c in office_fan_off:
@@ -472,7 +472,29 @@ class tv_api_handler(object):
         tv.standby()
         dbg("sending cec tv standby")
         return True
+      
+class rf_handler(object):
+    def __init__(self, on_cmd, off_cmd, pulse_time):
+        self.on_cmd = on_cmd
+        self.off_cmd = off_cmd
+        self.pulse_time = pulse_time
 
+    def on(self):
+        pi.wave_send_repeat(self.on_cmd) # start sending wave on repeat
+        time.sleep(self.pulse_time)
+        pi.wave_tx_stop() # stop waveform
+        pi.wave_clear() # clear all waveforms
+        dbg("sending rf on")
+        return True
+
+    def off(self):
+        pi.wave_send_repeat(self.off_cmd) # start sending wave on repeat
+        time.sleep(self.pulse_time)
+        pi.wave_tx_stop() # stop waveform
+        pi.wave_clear() # clear all waveforms
+        dbg("sending rf off")
+        return True
+      
 
 # Each entry is a list with the following elements:
 #
@@ -485,9 +507,10 @@ class tv_api_handler(object):
 # list will be used.
 
 FAUXMOS = [
-    ['office lights', test_api_handler('bath lights on', 'bath lights off'), 49153],
-    ['bedroom lights', test_api_handler('bedroom lights on', 'bedroom lights off')],
-    ['bedroom tv', tv_api_handler()],
+    ['bedroom tv', tv_api_handler(), 49153],
+    ['office lights', rf_handler(office_light_wid, office_light_wid, 0.2), 49154],
+    ['office fan', rf_handler(office_fan_high_wid, office_fan_off_wid, 0.2), 49155],
+    ['office fan low', rf_handler(office_fan_low_wid, office_fan_off_wid, 0.2), 49156],
 ]
 
 

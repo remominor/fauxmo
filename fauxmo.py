@@ -52,11 +52,48 @@ office_fan_low_wf=[]
 office_fan_med_wf=[]
 office_fan_high_wf=[]
 
+mbed_light_wf=[]
+mbed_fan_off_wf=[]
+mbed_fan_low_wf=[]
+mbed_fan_med_wf=[]
+mbed_fan_high_wf=[]
+
+media_light_wf=[]
+media_fan_off_wf=[]
+media_fan_low_wf=[]
+media_fan_med_wf=[]
+media_fan_high_wf=[]
+
+living_light_wf=[]
+living_fan_off_wf=[]
+living_fan_low_wf=[]
+living_fan_med_wf=[]
+living_fan_high_wf=[]
+
 office_light="001011011011011011001001001001001001011000"
 office_fan_off="001011011011011011001001001001001011001000"
 office_fan_low="001011011011011011001001001011001001001000"
 office_fan_med="001011011011011011001001011001001001001000"
 office_fan_high="001011011011011011001011001001001001001000"
+
+mbed_light="001011001001001001001001001001001001011000"
+mbed_fan_off="001011001001001001001001001001001011001000"
+mbed_fan_low="001011001001001001001001001011001001001000"
+mbed_fan_med="001011001001001001001001011001001001001000"
+mbed_fan_high="001011001001001001001011001001001001001000"
+
+media_light="001011001011011011001001001001001001011000"
+media_fan_off="001011001011011011001001001001001011001000"
+media_fan_low="001011001011011011001001001011001001001000"
+media_fan_med="001011001011011011001001011001001001001000"
+media_fan_high="001011001011011011001011001001001001001000"
+
+living_light="001011001001001011001001001001001001011000"
+living_fan_off="001011001001001011001001001001001011001000"
+living_fan_low="001011001001001011001001001011001001001000"
+living_fan_med="001011001001001011001001011001001001001000"
+living_fan_high="001011001001001011001011001001001001001000"
+
 
 pi.wave_clear() # clear any existing waveforms
 
@@ -95,7 +132,115 @@ for c in office_fan_high:
       office_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
 office_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
 
+
+for c in mbed_light:
+   if c == '1':
+      mbed_light_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      mbed_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+mbed_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
       
+for c in mbed_fan_off:
+   if c == '1':
+      mbed_fan_off_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      mbed_fan_off_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+mbed_fan_off_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in mbed_fan_low:
+   if c == '1':
+      mbed_fan_low_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      mbed_fan_low_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+mbed_fan_low_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in mbed_fan_med:
+   if c == '1':
+      mbed_fan_med_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      mbed_fan_med_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+mbed_fan_med_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in mbed_fan_high:
+   if c == '1':
+      mbed_fan_high_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      mbed_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+mbed_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+
+
+for c in media_light:
+   if c == '1':
+      media_light_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      media_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+media_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in media_fan_off:
+   if c == '1':
+      media_fan_off_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      media_fan_off_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+media_fan_off_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in media_fan_low:
+   if c == '1':
+      media_fan_low_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      media_fan_low_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+media_fan_low_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in media_fan_med:
+   if c == '1':
+      media_fan_med_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      media_fan_med_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+media_fan_med_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in media_fan_high:
+   if c == '1':
+      media_fan_high_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      media_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+media_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+
+
+for c in living_light:
+   if c == '1':
+      living_light_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      living_light_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+living_light_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in living_fan_off:
+   if c == '1':
+      living_fan_off_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      living_fan_off_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+living_fan_off_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in living_fan_low:
+   if c == '1':
+      living_fan_low_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      living_fan_low_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+living_fan_low_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in living_fan_med:
+   if c == '1':
+      living_fan_med_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      living_fan_med_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+living_fan_med_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+      
+for c in living_fan_high:
+   if c == '1':
+      living_fan_high_wf.append(pigpio.pulse(GPIO17, 0, DELAY))
+   else:
+      living_fan_high_wf.append(pigpio.pulse(0, GPIO17, DELAY))
+living_fan_high_wf.append(pigpio.pulse(0, GPIO17, delay=10000))
+
+
 
 # This XML is the minimum needed to define one of our virtual switches
 # to the Amazon Echo
@@ -502,6 +647,21 @@ FAUXMOS = [
     ['office fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49156],
     ['office fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49157],
     ['office fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49158],
+    ['bedroom fan light', rf_handler(office_light_wf, office_light_wf, 0.2), 49159],
+    ['bedroom fan', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49160],
+    ['bedroom fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49161],
+    ['bedroom fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49162],
+    ['bedroom fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49163],
+    ['media', rf_handler(office_light_wf, office_light_wf, 0.2), 49164],
+    ['media fan', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49165],
+    ['media fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49166],
+    ['media fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49167],
+    ['media fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49168],
+    ['living fan light', rf_handler(office_light_wf, office_light_wf, 0.2), 49169],
+    ['living fan', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49170],
+    ['living fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49171],
+    ['living fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49172],
+    ['living fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49173],
 ]
 
 

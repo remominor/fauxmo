@@ -498,8 +498,10 @@ class rf_handler(object):
 FAUXMOS = [
     ['bedroom tv', tv_api_handler(), 49153],
     ['office', rf_handler(office_light_wf, office_light_wf, 0.2), 49154],
-    ['office fan', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49155],
+    ['office fan', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49155],
     ['office fan low', rf_handler(office_fan_low_wf, office_fan_off_wf, 0.2), 49156],
+    ['office fan medium', rf_handler(office_fan_med_wf, office_fan_off_wf, 0.2), 49157],
+    ['office fan high', rf_handler(office_fan_high_wf, office_fan_off_wf, 0.2), 49158],
 ]
 
 
